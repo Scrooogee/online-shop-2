@@ -1,5 +1,4 @@
 import React from 'react'
-import './App.css';
 import './scss/app.scss'
 import Header from './components/Header';
 import Categories from './components/Categories';
@@ -35,7 +34,7 @@ function App() {
                     <div className="content__items">
                        {allItems.map((item, index) => ( 
                             <Card 
-                            key={`${item}__${index}`}
+                            key={`${item.title}__${index}`}
                             {...item}/>
                         ))}
                     </div>

@@ -1,7 +1,7 @@
 import React from 'react'
 
 
-function Card({title, imageUrl, price, sizes = []}) {
+function Card({title, imageUrl, price, sizes}) {
     const [sizeItem, setSizeItem] = React.useState(0)
 
     return(
