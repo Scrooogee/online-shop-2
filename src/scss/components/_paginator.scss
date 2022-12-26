@@ -1,0 +1,35 @@
+.paginator {
+    margin: 50px 0 0 0;
+    display: flex;
+    justify-content: center;
+
+    button {
+        width: 40px;
+        height: 40px;
+        font-size: 18px;
+        border: 1px solid $blue;
+        border-radius: 50%;
+        background-color: transparent;
+        margin: 0 5px;
+        cursor: pointer;
+
+        &:nth-last-child(1) {
+            transform: rotate(180deg);
+        }
+
+
+        &:hover {
+            background-color: $blue;
+            color: white;
+
+            path {
+                fill: white;
+            }
+        }
+
+        &:disabled {
+            cursor: auto;
+            opacity: 0.3;
+        }
+    }
+}

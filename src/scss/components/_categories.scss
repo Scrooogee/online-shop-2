@@ -1,8 +1,9 @@
 @import '../variables';
 
 .categories {
-  overflow: scroll;
+  overflow: auto;
   margin-bottom: 30px;
+  max-width: 100%;
   ul {
     display: flex;
 
@@ -32,7 +33,7 @@
     }
   }
 
-  @media(min-width: 963px) {
+  @media(min-width: 838px) {
     margin-bottom: 0;
   }
 }

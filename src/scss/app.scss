@@ -6,6 +6,7 @@
 body {
   background-image: url(../assets/img/bg_initial.jpg);
   padding: 50px 30px;
+  min-width: 430px;
 }
 
 .wrapper {
@@ -20,26 +21,34 @@ body {
   padding: 40px 0;
 
   &__title {
-    margin: 35px 0;
+    margin: 38px 0;
+    font-weight: 800;
   }
 
   &__items {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 36px;
+    gap: 50px;
   }
 
   &__top {
     display: flex;
+    flex-direction: column;
     flex-wrap: wrap;
     align-items: center;
     justify-content: space-between;
   }
 
-  @media(min-width: 769px) {
+  @media(min-width: 768px) {
     &__items {
       grid-template-columns: 1fr 1fr;
     }
+  }
+
+  @media(min-width: 838px) {
+      &__top {
+        flex-direction: row;
+      }
   }
 
 
@@ -55,7 +64,21 @@ body {
     }
   }
 }
+.sceleton {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
 
+  rect:nth-child(2) {
+    width: 100%;
+  }
+  rect:nth-child(3) {
+    width: 100%;
+  }
+  rect:nth-child(4) {
+    width: 100%;
+  }
+}
 .container {
   width: $container-width;
   margin: 0 auto;
@@ -293,7 +316,7 @@ body {
   }
 
   &--empty {
-    margin: 0 auto;
+    margin: 50px auto;
     width: 560px;
     text-align: center;
 
@@ -316,7 +339,6 @@ body {
 
     img {
       display: block;
-      width: 300px;
       margin: 45px auto 60px;
     }
 

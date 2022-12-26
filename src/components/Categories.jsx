@@ -1,19 +1,20 @@
 import React from 'react'
+import { HomeContext } from '../pages/Home';
 
 function Categories() {
 
-    const [brands, setBrands] = React.useState(0)
+    const {categories, setCategories} = React.useContext(HomeContext)
 
-    const brandsItem = ['All', 'Casual', 'Sport', 'Canvas', 'Skate'];
+    const categoriesItem = ['All', 'Casual', 'Sport', 'Canvas', 'Skate'];
 
     return (
         <div className="categories">
             <ul>
-                {brandsItem.map((name, index) => ( 
+                {categoriesItem.map((name, index) => ( 
                     <li 
                     key={`${name}__${index}`}  
-                    className={brands === index ? 'active' : ''} 
-                    onClick={() => setBrands(index)}>{name}</li>
+                    className={categories === index ? 'active' : ''} 
+                    onClick={() => setCategories(index)}>{name}</li>
                 ))}
             </ul>
         </div>

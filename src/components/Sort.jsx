@@ -1,16 +1,25 @@
-import React from 'react'
+import React from 'react';
+import { HomeContext } from '../pages/Home';
 
 function Sort() {
 
-    const [openSort, setOpenSort] = React.useState(false)
-    const [sortItemStatus, setSortItemStatus] = React.useState(0)
+    const {sortItemStatus, setSortItemStatus} = React.useContext(HomeContext)
 
-    const onCLkickSortItem = (index) => {
-        setSortItemStatus(index)
+    const [openSort, setOpenSort] = React.useState(false)
+
+    const onCLkickSortItem = (obj) => {
+        setSortItemStatus(obj)
         setOpenSort(false)
     }
 
-    const sortItems = ['popular', 'price', 'alphabet']
+    const sortItems = [
+        {name: 'popular ↓', property: 'rating'}, 
+        {name: 'popular ↑', property: '-rating'}, 
+        {name: 'price ↓', property: 'price'}, 
+        {name: 'price ↑', property: '-price'},
+        {name:'alphabet ↓', property: 'title'},
+        {name:'alphabet ↑', property: '-title'}
+    ]
     
     return(
         <div className="sort">
@@ -19,16 +28,16 @@ function Sort() {
                 <path d="M10 5C10 5.16927 9.93815 5.31576 9.81445 5.43945C9.69075 5.56315 9.54427 5.625 9.375 5.625H0.625C0.455729 5.625 0.309245 5.56315 0.185547 5.43945C0.061849 5.31576 0 5.16927 0 5C0 4.83073 0.061849 4.68424 0.185547 4.56055L4.56055 0.185547C4.68424 0.061849 4.83073 0 5 0C5.16927 0 5.31576 0.061849 5.43945 0.185547L9.81445 4.56055C9.93815 4.68424 10 4.83073 10 5Z" fill="#2C2C2C"></path>
                 </svg>
                 <b>Sort by:</b>
-                <span>{sortItems[sortItemStatus]}</span>
+                <span>{sortItemStatus.name}</span>
             </div>
             {openSort && 
                 <div className='sort__popup'>
                     <ul>
-                        {sortItems.map((item, index) => (
+                        {sortItems.map((obj, index) => (
                             <li
-                            key={`${item}__${index}`}
-                            onClick={() => onCLkickSortItem(index)}
-                            className={sortItemStatus === index ? "active" : ''}>{item}</li>
+                            key={`${obj.name}__${index}`}
+                            onClick={() => onCLkickSortItem(obj)}
+                            className={sortItemStatus.name === obj.name ? "active" : ''}>{obj.name}</li>
                         ))}
                     </ul>
                 </div>
