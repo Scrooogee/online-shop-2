@@ -1,22 +1,26 @@
 import React from 'react';
-import { HomeContext } from '../pages/Home';
+import { useSelector, useDispatch} from 'react-redux';
+import {setPage} from '../redux/slices/paginationSlice'
 
 
 function Pagination(){
 
-    const {pageItem, setPageItem} = React.useContext(HomeContext)
+    const dispatch = useDispatch()
+
+    const pageItem = useSelector(state => state.paginationSlice.pageItem)
+
 
     const pages = [1, 2, 3]
 
     const setPrevPage = () => {
         if (pageItem > 1) {
-            setPageItem(pageItem - 1)
+            setPage(pageItem - 1)
         }
     }
 
     const setNextPage = () => {
         if (pageItem < pages.length) {
-            setPageItem(pageItem + 1)
+            setPage(pageItem + 1)
         }
     }
 
@@ -27,8 +31,9 @@ function Pagination(){
             </button>
             {pages.map((page, index) => (
             <button 
+            className={pageItem === page ? 'button_active' : ''}
             key={index}
-            onClick={() => setPageItem(page)}
+            onClick={() => dispatch(setPage(page))}
             >{page}</button>
             ))}
             <button onClick={setNextPage}>

@@ -5,30 +5,30 @@ import Card from '../components/Card';
 import Skeleton from '../components/Card/Skeleton';
 import Pagination from '../components/Pagination';
 import axios from 'axios';
-
+import { useSelector } from 'react-redux';
 export const HomeContext = React.createContext()
 
 
 function Home() {
 
+    const {categoryId, sortType} = useSelector(state => state.filterSlice)
+    const pageItem = useSelector(state => state.paginationSlice.pageItem)
+
     const [allItems, setAllItems] = React.useState([])
     const [loadinSkeleton, setLoadingSkeleton] = React.useState(true)
-    const [categories, setCategories] = React.useState(0)
-    const [sortItemStatus, setSortItemStatus] = React.useState({name: 'popular ↓', property: 'rating'})
-    const [pageItem, setPageItem] = React.useState(1)
+
 
     React.useEffect(() => {
 
-        const order = sortItemStatus.property.includes('-') ? 'asc' : 'desc';
-        const sortBy = sortItemStatus.property.replace('-', '');
-        const categorie = categories > 0 ? `category=${categories}` : '';
+        const order = sortType.property.includes('-') ? 'asc' : 'desc';
+        const sortBy = sortType.property.replace('-', '');
+        const categorie = categoryId > 0 ? `category=${categoryId}` : '';
         const pages = `&page=${pageItem}&limit=8`
 
         async function fetchData() {
             setLoadingSkeleton(true)
 
             const itemsRespons = await axios.get(`https://637c4a6372f3ce38ea9edc01.mockapi.io/Items?${categorie}${pages}&sortBy=${sortBy}&order=${order}`);
-            
             
             setAllItems(itemsRespons.data)
             setLoadingSkeleton(false)
@@ -37,12 +37,12 @@ function Home() {
 
         window.scrollTo(0, 0)
         
-      }, [categories, sortItemStatus, pageItem])
+    }, [categoryId, sortType, pageItem])
 
 
     return (
         <>
-            <HomeContext.Provider value={{categories, setCategories, sortItemStatus, setSortItemStatus, pageItem, setPageItem}}>
+            <HomeContext.Provider>
                 <div className="content__top">
                     <Categories/>
                     <Sort/>

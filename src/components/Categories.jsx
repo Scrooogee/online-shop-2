@@ -1,9 +1,11 @@
 import React from 'react'
-import { HomeContext } from '../pages/Home';
+import { useSelector, useDispatch} from 'react-redux';
+import { setCategorieId } from '../redux/slices/filterSlice';
 
 function Categories() {
+    const dispatch = useDispatch()
 
-    const {categories, setCategories} = React.useContext(HomeContext)
+    const categoryId = useSelector(state => state.filterSlice.categoryId)
 
     const categoriesItem = ['All', 'Casual', 'Sport', 'Canvas', 'Skate'];
 
@@ -13,8 +15,8 @@ function Categories() {
                 {categoriesItem.map((name, index) => ( 
                     <li 
                     key={`${name}__${index}`}  
-                    className={categories === index ? 'active' : ''} 
-                    onClick={() => setCategories(index)}>{name}</li>
+                    className={categoryId === index ? 'active' : ''} 
+                    onClick={() => dispatch(setCategorieId(index))}>{name}</li>
                 ))}
             </ul>
         </div>

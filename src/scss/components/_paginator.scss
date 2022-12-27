@@ -27,9 +27,14 @@
             }
         }
 
-        &:disabled {
-            cursor: auto;
-            opacity: 0.3;
-        }
+    }
+
+    .button_active {
+        background-color: $blue;
+        color: white;
+
+            path {
+                fill: white;
+            }
     }
 }
