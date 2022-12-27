@@ -1,13 +1,13 @@
 import React from 'react';
 import { useSelector, useDispatch} from 'react-redux';
-import {setPage} from '../redux/slices/paginationSlice'
+import {setPage} from '../redux/slices/filterSlice'
 
 
 function Pagination(){
 
     const dispatch = useDispatch()
 
-    const pageItem = useSelector(state => state.paginationSlice.pageItem)
+    const pageItem = useSelector(state => state.filterSlice.pageItem)
 
 
     const pages = [1, 2, 3]

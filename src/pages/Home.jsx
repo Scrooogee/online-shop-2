@@ -1,21 +1,27 @@
 import React from 'react'
+
+import axios from 'axios';
+import { useSelector } from 'react-redux';
+
+
+
 import Categories from '../components/Categories';
 import Sort from '../components/Sort';
 import Card from '../components/Card';
 import Skeleton from '../components/Card/Skeleton';
 import Pagination from '../components/Pagination';
-import axios from 'axios';
-import { useSelector } from 'react-redux';
+
+
 export const HomeContext = React.createContext()
 
 
 function Home() {
 
-    const {categoryId, sortType} = useSelector(state => state.filterSlice)
-    const pageItem = useSelector(state => state.paginationSlice.pageItem)
+    const {categoryId, sortType} = useSelector(state => state.filterSlice);
+    const pageItem = useSelector(state => state.filterSlice.pageItem);
 
-    const [allItems, setAllItems] = React.useState([])
-    const [loadinSkeleton, setLoadingSkeleton] = React.useState(true)
+    const [allItems, setAllItems] = React.useState([]);
+    const [loadinSkeleton, setLoadingSkeleton] = React.useState(true);
 
 
     React.useEffect(() => {
