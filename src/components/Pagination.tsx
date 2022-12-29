@@ -1,26 +1,26 @@
 import React from 'react';
 import { useSelector, useDispatch} from 'react-redux';
-import {setPage} from '../redux/slices/filterSlice'
+import { setPage, selectPage} from '../redux/slices/filterSlice'
 
 
-function Pagination(){
+const Pagination: React.FC = () => {
 
     const dispatch = useDispatch()
 
-    const pageItem = useSelector(state => state.filterSlice.pageItem)
+    const pageItem = useSelector(selectPage)
 
 
     const pages = [1, 2, 3]
 
     const setPrevPage = () => {
         if (pageItem > 1) {
-            setPage(pageItem - 1)
+            dispatch(setPage(pageItem - 1))
         }
     }
 
     const setNextPage = () => {
         if (pageItem < pages.length) {
-            setPage(pageItem + 1)
+            dispatch(setPage(pageItem + 1))
         }
     }
 

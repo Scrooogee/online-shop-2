@@ -1,9 +1,19 @@
 import React from 'react'
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 import { addCartItems } from '../../redux/slices/cartSlice';
 
+type CardProps = {
+    id: string,
+    title: string,
+    imageUrl: string,
+    price: number,
+    sizes: number[]
+}
 
-function Card({id, title, imageUrl, price, sizes}) {
+const Card: React.FC<CardProps> = ({id, title, imageUrl, price, sizes}) => {
+
+    const navigate = useNavigate()
 
     const dispatch = useDispatch()
 
@@ -21,8 +31,8 @@ function Card({id, title, imageUrl, price, sizes}) {
     }
     return(
         <div className="item-block">
-            <img className="item-block__image" src={imageUrl} alt="item"></img>
-            <h4 className="item-block__title">{title}</h4>
+            <img onClick={() => navigate(`product/${id}`)}  className="item-block__image" src={imageUrl} alt="item"></img>
+            <h4 onClick={() => navigate(`product/${id}`)}  className="item-block__title">{title}</h4>
             <div className="item-block__selector">
                 <ul>
                    {sizes.map((size, index) => (

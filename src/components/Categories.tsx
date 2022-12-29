@@ -1,11 +1,11 @@
 import React from 'react'
 import { useSelector, useDispatch} from 'react-redux';
-import { setCategorieId } from '../redux/slices/filterSlice';
+import { setCategorieId , selectCategory} from '../redux/slices/filterSlice';
 
-function Categories() {
+const Categories: React.FC = () => {
     const dispatch = useDispatch()
 
-    const categoryId = useSelector(state => state.filterSlice.categoryId)
+    const categoryId = useSelector(selectCategory)
 
     const categoriesItem = ['All', 'Casual', 'Sport', 'Canvas', 'Skate'];
 

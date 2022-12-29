@@ -20,13 +20,19 @@ export const filterSlice = createSlice({
         setSort(state, action) {
             state.sortType = action.payload
         },
-        setFilters(state, action) {
-            state.categoryId = action.payload;
-        }
+        setPage(state, action) {
+            state.pageItem = action.payload;
+        },
+
     },
 
 })
 
+
+export const selectFilter = state => state.filterSlice;
+export const selectCategory = state => state.filterSlice.categoryId;
+export const selectSortType = state => state.filterSlice.sortType;
+export const selectPage = state => state.filterSlice.pageItem;
 
 export const { setCategorieId, setSort, setPage } = filterSlice.actions
 

@@ -1,18 +1,38 @@
-import React, { useEffect, useRef } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSort } from '../redux/slices/filterSlice';
+import { setSort, selectSortType } from '../redux/slices/filterSlice';
 
-function Sort() {
+type SortType = {
+    name: string,
+    property: string
+}
+
+const sortItems: SortType[] = [
+    {name: 'popular ↓', property: 'rating'}, 
+    {name: 'popular ↑', property: '-rating'}, 
+    {name: 'price ↓', property: 'price'}, 
+    {name: 'price ↑', property: '-price'},
+    {name:'alphabet ↓', property: 'title'},
+    {name:'alphabet ↑', property: '-title'}
+]
+
+
+const Sort: React.FC = () => {
 
     const dispatch = useDispatch()
 
-    const sortType = useSelector(state => state.filterSlice.sortType);
-    const sortRef = useRef();
+    const sortType = useSelector(selectSortType);
+    const sortRef = React.useRef<HTMLDivElement>(null);
 
     const [openSort, setOpenSort] = React.useState(false)
 
+    const onCLkickSortItem = (obj: object) => {
+        dispatch(setSort(obj))
+        setOpenSort(false)
+    }
+
     React.useEffect(() => {
-        const handlClickOutside = event => {
+        const handlClickOutside = (event: any) => {
             if (!event.path.includes(sortRef.current)) {
                 setOpenSort(false)
             } 
@@ -21,24 +41,6 @@ function Sort() {
 
         return () => document.body.removeEventListener('click', handlClickOutside);
     }, [])
-
-    const onCLkickSortItem = (obj) => {
-        dispatch(setSort(obj))
-        setOpenSort(false)
-    }
-
-
-
-
-
-    const sortItems = [
-        {name: 'popular ↓', property: 'rating'}, 
-        {name: 'popular ↑', property: '-rating'}, 
-        {name: 'price ↓', property: 'price'}, 
-        {name: 'price ↑', property: '-price'},
-        {name:'alphabet ↓', property: 'title'},
-        {name:'alphabet ↑', property: '-title'}
-    ]
     
     return(
         <div ref={sortRef} className="sort">
