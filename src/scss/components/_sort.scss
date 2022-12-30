@@ -5,7 +5,7 @@
   cursor: pointer;
   align-self: flex-end;
 
-  &__label {
+  &--label {
     display: flex;
     align-items: center;
 
@@ -23,7 +23,7 @@
     }
   }
 
-  &__popup {
+  &--popup {
     position: absolute;
     right: 0;
     margin-top: 15px;

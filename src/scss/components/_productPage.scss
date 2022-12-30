@@ -12,7 +12,7 @@
       align-items: center;
     }
     
-    &__image {
+    &--image {
         width: 50%;
         
         img {
@@ -21,27 +21,27 @@
         }
     }
 
-    &__info-block {
+    &--info-block {
         width: 50%;
         margin-left: 50px;
     }
 
 
-    &__title {
+    &--title {
         font-size: 35px;
         font-weight: 900;
         letter-spacing: 1%;
         margin-bottom: 20px;
     } 
 
-    &__price {
+    &--price {
         font-weight: bold;
         font-size: 27px;
         line-height: 27px;
         letter-spacing: 0.015em;
     }
 
-    &__selector {
+    &--selector {
         max-width: 300px;
         display: flex;
         background-color: #f3f3f3;

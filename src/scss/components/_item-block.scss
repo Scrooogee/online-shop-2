@@ -8,13 +8,13 @@
   height: 100%; 
   transition: all .2s ease-in-out;
 
-  &__image {
+  &--image {
     width: 90%;
     align-self: center;
     cursor: pointer;
   }
 
-  &__title {
+  &--title {
     font-size: 20px;
     font-weight: 900;
     letter-spacing: 1%;
@@ -22,7 +22,7 @@
     cursor: pointer;
   }
 
-  &__selector {
+  &--selector {
     display: flex;
     background-color: #f3f3f3;
     border-radius: 10px;
@@ -51,14 +51,14 @@
     }
   }
 
-  &__bottom {
+  &--bottom {
     display: flex;
     align-items: center;
     justify-content: space-between;
     margin-top: 20px;
   }
 
-  &__price {
+  &--price {
     font-weight: bold;
     font-size: 22px;
     line-height: 27px;

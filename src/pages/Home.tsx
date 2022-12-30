@@ -50,15 +50,15 @@ const Home: React.FC = () => {
 
     return (
         <>
-            <div className="content__top">
+            <div className="content--top">
                 <Categories/>
                 <Sort/>
             </div>
-            <h2 className="content__title">All sneakers</h2>
-            <div className="content__items">
+            <h2 className="content--title">All sneakers</h2>
+            <div className="content--items">
             {status === 'loading' ? [...new Array(12)].map((_, index)=> (<Skeleton key={index}/>)) : items.map((item: CardProps, index: number) => ( 
                     <Card 
-                    key={`${item.title}__${index}`}
+                    key={`${item.title}--${index}`}
                     {...item}/>
                 ))}
             </div>

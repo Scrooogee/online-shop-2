@@ -13,7 +13,7 @@ const Header: React.FC = () => {
         <div className="header">
             <div className="container">
                 <Link to='/'>
-                    <div className="header__logo">
+                    <div className="header--logo">
                         <img width={55} height={55} src={logo}alt="Logo"></img>
                         <div>
                         <h1>Best sneakers</h1>
@@ -22,10 +22,10 @@ const Header: React.FC = () => {
                     </div>
                 </Link>
                 <Link to='/cart'>
-                    <div className="header__cart">
+                    <div className="header--cart">
                         <a href="/cart.html" className="button button--cart">
                         <span>$ {totalPrice}</span>
-                        <div className="button__delimiter"></div>
+                        <div className="button--delimiter"></div>
                         <svg width="18" height="18" viewBox="0 0 18 18" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M6.33333 16.3333C7.06971 16.3333 7.66667 15.7364 7.66667 15C7.66667 14.2636 7.06971 13.6667 6.33333 13.6667C5.59695 13.6667 5 14.2636 5 15C5 15.7364 5.59695 16.3333 6.33333 16.3333Z" stroke="white" stroke-linecap="1.8" strokeWidth="round" strokeLinejoin="round"></path>
                             <path d="M14.3333 16.3333C15.0697 16.3333 15.6667 15.7364 15.6667 15C15.6667 14.2636 15.0697 13.6667 14.3333 13.6667C13.597 13.6667 13 14.2636 13 15C13 15.7364 13.597 16.3333 14.3333 16.3333Z" stroke="white" stroke-linecap="1.8" strokeWidth="round" strokeLinejoin="round"></path>

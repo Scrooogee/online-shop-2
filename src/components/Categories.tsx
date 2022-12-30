@@ -14,7 +14,7 @@ const Categories: React.FC = () => {
             <ul>
                 {categoriesItem.map((name, index) => ( 
                     <li 
-                    key={`${name}__${index}`}  
+                    key={`${name}--${index}`}  
                     className={categoryId === index ? 'active' : ''} 
                     onClick={() => dispatch(setCategorieId(index))}>{name}</li>
                 ))}

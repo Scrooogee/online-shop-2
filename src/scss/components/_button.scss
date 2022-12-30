@@ -80,6 +80,20 @@
           fill: #fff;
         }
       }
+
+      &:disabled {
+        background-color: transparent;
+        cursor: auto;
+
+        &:active {
+          transform: none;
+        }
+
+
+        &:hover {
+          background-color: transparent;
+        }
+      }
     }
 
     &:active {
@@ -87,7 +101,7 @@
     }
   }
 
-  &__delimiter {
+  &--delimiter {
     width: 1px;
     height: 25px;
     background-color: rgba(255, 255, 255, 0.25);
