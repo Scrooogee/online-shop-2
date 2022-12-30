@@ -1,10 +1,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { setSort, selectSortType } from '../redux/slices/filterSlice';
+import { setSort, selectSortType, SortType } from '../redux/slices/filterSlice';
 
-type SortType = {
-    name: string,
-    property: string
+type SortClick = MouseEvent & {
+    path: Node[]
 }
 
 const sortItems: SortType[] = [
@@ -26,14 +25,17 @@ const Sort: React.FC = () => {
 
     const [openSort, setOpenSort] = React.useState(false)
 
-    const onCLkickSortItem = (obj: object) => {
+    const onCLkickSortItem = (obj: SortType) => {
         dispatch(setSort(obj))
         setOpenSort(false)
     }
 
     React.useEffect(() => {
-        const handlClickOutside = (event: any) => {
-            if (!event.path.includes(sortRef.current)) {
+        const handlClickOutside = (event: MouseEvent) => {
+
+            const _event = event as SortClick;
+
+            if (sortRef.current && !_event.path.includes(sortRef.current)) {
                 setOpenSort(false)
             } 
         };
@@ -54,7 +56,7 @@ const Sort: React.FC = () => {
             {openSort && 
                 <div className='sort__popup'>
                     <ul>
-                        {sortItems.map((obj, index) => (
+                        {sortItems.map((obj: SortType, index: number) => (
                             <li
                             key={`${obj.name}__${index}`}
                             onClick={() => onCLkickSortItem(obj)}

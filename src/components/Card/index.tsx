@@ -1,9 +1,10 @@
 import React from 'react'
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { CartItemsProps } from '../../pages/CartItem';
 import { addCartItems } from '../../redux/slices/cartSlice';
 
-type CardProps = {
+export type CardProps = {
     id: string,
     title: string,
     imageUrl: string,
@@ -20,12 +21,13 @@ const Card: React.FC<CardProps> = ({id, title, imageUrl, price, sizes}) => {
     const [sizeItem, setSizeItem] = React.useState(sizes[0])
 
     const onClickAdd = () => {
-        const item = {
+        const item : CartItemsProps = {
             id,
             title,
             imageUrl,
             price,
-            size: sizeItem
+            size: sizeItem,
+            count: 0,
         };
         dispatch(addCartItems(item))
     }

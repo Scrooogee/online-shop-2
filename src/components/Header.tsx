@@ -2,11 +2,12 @@ import logo from '../assets/img/logo.png'
 import { Link } from 'react-router-dom';
 import { useSelector } from 'react-redux';
 import {selectCart} from '../redux/slices/cartSlice';
+import { CartItemType } from '../pages/Cart';
 
 const Header: React.FC = () => {
 
     const {cartItems, totalPrice} = useSelector(selectCart);
-    const totalCount = cartItems.reduce((sum: number, item: any) => sum += item.count, 0);
+    const totalCount = cartItems.reduce((sum: number, item: CartItemType) => sum += item.count, 0);
 
     return(
         <div className="header">

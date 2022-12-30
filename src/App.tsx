@@ -7,7 +7,7 @@ import MainLayloat from './components/MainLayloat';
 import ProductPage from './pages/ProductPage';
 import {BrowserRouter as Router, Routes, Route} from "react-router-dom";
 
-function App() {
+const App: React.FC = () =>  {
 
     return (
         <Router>

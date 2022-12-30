@@ -4,12 +4,17 @@ import { Link } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { clearItems, selectCart } from "../redux/slices/cartSlice";
 import CartItem from "./CartItem";
+import { CartItemsProps } from "./CartItem";
+
+export type CartItemType = {
+    count: number
+}
 
 const Cart: React.FC = () => {
     const dispatch = useDispatch();
     const {cartItems, totalPrice} = useSelector(selectCart);
 
-    const totalCount = cartItems.reduce((sum: number, item: any) => sum += item.count, 0);
+    const totalCount = cartItems.reduce((sum: number, item: CartItemType) => sum += item.count, 0);
 
     const cleanCart = () => {
         if (window.confirm('Clean the cart?')) {
@@ -41,7 +46,7 @@ const Cart: React.FC = () => {
                     </div>
                 </div>
                 <div className="cart__items">
-                {cartItems.map((item: any, index: any) => (
+                {cartItems.map((item: CartItemsProps, index: number) => (
                         <CartItem 
                         key={`${item}__${index}`}
                         {...item}/>

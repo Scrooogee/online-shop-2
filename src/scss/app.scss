@@ -9,12 +9,28 @@ body {
   min-width: 430px;
 }
 
+.not-found {
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  h1 {
+    font-size: 62px;
+  }
+
+  p {
+    font-size: 27px;
+  }
+}
+
 .wrapper {
   max-width: 1400px;
   height: 100%;
   background-color: #fff;
   margin: 0 auto;
   border-radius: 20px;
+  min-height: 90vh;
 }
 
 .content {
@@ -80,10 +96,6 @@ body {
   }
 }
 
-.product-loader {
-  width: 100%;
-  margin: auto auto;
-}
 
 .container {
   width: $container-width;

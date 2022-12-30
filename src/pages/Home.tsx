@@ -2,7 +2,7 @@ import React from 'react'
 import { useSelector, useDispatch} from 'react-redux';
 import { selectFilter } from '../redux/slices/filterSlice';
 import { selectGood } from '../redux/slices/goodsSlice';
-
+import { useAppDispatch } from '../redux/store';
 
 
 import Categories from '../components/Categories';
@@ -11,12 +11,13 @@ import Card from '../components/Card';
 import Skeleton from '../components/Card/Skeleton';
 import Pagination from '../components/Pagination';
 import { fetchGoods } from '../redux/slices/goodsSlice';
+import { CardProps } from '../components/Card';
 
 
 
 const Home: React.FC = () => {
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
     const {categoryId, sortType, pageItem} = useSelector(selectFilter);
     const {items, status} = useSelector(selectGood)
@@ -32,7 +33,6 @@ const Home: React.FC = () => {
             const pages = `&page=${pageItem}&limit=8`
 
             dispatch(
-                // @ts-ignore
                 fetchGoods({
                 order,
                 sortBy,
@@ -56,7 +56,7 @@ const Home: React.FC = () => {
             </div>
             <h2 className="content__title">All sneakers</h2>
             <div className="content__items">
-            {status === 'loading' ? [...new Array(12)].map((_, index)=> (<Skeleton key={index}/>)) : items.map((item: any, index: number) => ( 
+            {status === 'loading' ? [...new Array(12)].map((_, index)=> (<Skeleton key={index}/>)) : items.map((item: CardProps, index: number) => ( 
                     <Card 
                     key={`${item.title}__${index}`}
                     {...item}/>
