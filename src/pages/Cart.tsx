@@ -1,16 +1,24 @@
 import CartEmpty from "./CartEmpty";
 // import NotFound from "./NotFound";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { clearItems, selectCart } from "../redux/slices/cartSlice";
 import CartItem from "./CartItem";
 import { CartItemsProps } from "./CartItem";
+
 
 export type CartItemType = {
     count: number
 }
 
 const Cart: React.FC = () => {
+
+    const navigate = useNavigate()
+    const goToHome = () => {
+        navigate('/')
+        window.scrollTo({top: 0})
+    }
+
     const dispatch = useDispatch();
     const {cartItems, totalPrice} = useSelector(selectCart);
 
@@ -58,12 +66,12 @@ const Cart: React.FC = () => {
                         <span> Total amount: <b>$ {totalPrice}</b> </span>
                     </div>
                     <div className="cart--bottom-buttons">
-                        <Link to="/" className="button button--outline button--add go-back-btn">
+                        <button onClick={() => goToHome()} className="button button--outline button--add go-back-btn">
                             <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7 13L1 6.93015L6.86175 1" stroke="#D3D3D3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
                             <span>Вернуться назад</span>
-                        </Link>
+                        </button>
                         <div className="button pay-btn">
                             <span>Оплатить сейчас</span>
                         </div>

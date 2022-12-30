@@ -14,8 +14,8 @@ import { fetchGoods } from '../redux/slices/goodsSlice';
 import { CardProps } from '../components/Card';
 
 
-
 const Home: React.FC = () => {
+
 
     const dispatch = useAppDispatch();
 
@@ -43,14 +43,16 @@ const Home: React.FC = () => {
         }
         fetchData()
 
-        window.scrollTo(0, 0)
         
     }, [categoryId, sortType, pageItem])
 
 
     return (
-        <>
-            <div className="content--top">
+        <> 
+            <div className='home-img'>
+                <h1>Best Sneakers</h1>
+            </div>
+            <div id='top' className="content--top">
                 <Categories/>
                 <Sort/>
             </div>
@@ -62,7 +64,7 @@ const Home: React.FC = () => {
                     {...item}/>
                 ))}
             </div>
-            <Pagination/>
+            <Pagination />
         </>
     )
 };

@@ -15,13 +15,20 @@ const Pagination: React.FC = () => {
     const setPrevPage = () => {
         if (pageItem > 1) {
             dispatch(setPage(pageItem - 1))
+            window.scrollTo({top: 850});
         }
     }
 
     const setNextPage = () => {
         if (pageItem < pages.length) {
             dispatch(setPage(pageItem + 1))
+            window.scrollTo({top: 850});
         }
+    }
+
+    const setPageNumber = (page: number) => {
+        dispatch(setPage(page))
+        window.scrollTo({top: 850});
     }
 
     return (
@@ -33,7 +40,7 @@ const Pagination: React.FC = () => {
             <button 
             className={pageItem === page ? 'button_active' : ''}
             key={index}
-            onClick={() => dispatch(setPage(page))}
+            onClick={() => setPageNumber(page)}
             >{page}</button>
             ))}
             <button onClick={setNextPage}>
