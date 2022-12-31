@@ -24,7 +24,7 @@ const ProductPage: React.FC = () => {
             fetchProfuctPage({
                 id: `${id}`
             }))
-
+            
     }, [id])
 
     const onClickAdd = () => {

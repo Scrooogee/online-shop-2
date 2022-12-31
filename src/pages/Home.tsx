@@ -10,6 +10,8 @@ import Sort from '../components/Sort';
 import Card from '../components/Card';
 import Skeleton from '../components/Card/Skeleton';
 import Pagination from '../components/Pagination';
+
+
 import { fetchGoods } from '../redux/slices/goodsSlice';
 import { CardProps } from '../components/Card';
 
@@ -58,7 +60,9 @@ const Home: React.FC = () => {
             </div>
             <h2 className="content--title">All sneakers</h2>
             <div className="content--items">
-            {status === 'loading' ? [...new Array(12)].map((_, index)=> (<Skeleton key={index}/>)) : items.map((item: CardProps, index: number) => ( 
+            {status === 'loading' ? [...new Array(12)].map((_, index)=> (<Skeleton key={index}/>)) 
+            : 
+            items.map((item: CardProps, index: number) => ( 
                     <Card 
                     key={`${item.title}--${index}`}
                     {...item}/>
