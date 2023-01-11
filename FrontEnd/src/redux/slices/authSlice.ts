@@ -4,9 +4,26 @@ import { RootState } from "../store";
 
 type fetchLoginParams = Record<string, string>
 
+export type UserData =  {
+    address: string,
+    email: string,
+    isAdmin: boolean
+    lastName: string
+    name: string
+    _id: string
+}
+
+
+export type Data = {
+    userData: UserData
+}
+
+
+
+
 export const fetchLogin = createAsyncThunk('auth/fetchLogin', async (params: fetchLoginParams) => {
     const {data} = await axios.post('/auth/login', params);
-    // console.log(data)
+    console.log(data)
     return data
     
 });
@@ -20,12 +37,13 @@ export const fetchReg = createAsyncThunk('auth/fetchReg', async (params: fetchLo
 
 export const fetchAuthMe = createAsyncThunk('auth/fetchAuthMe', async () => {
     const {data} = await axios.get('/auth/me')
+    console.log(data)
     return data
 });
 
 
 interface AuthSliceState {
-    data: null,
+    data: Data | null,
     status: 'loading' | 'succes' | 'error'
 }
 
@@ -53,11 +71,11 @@ const authSlice = createSlice({
 
         builder.addCase(fetchLogin.rejected, (state) => {
             state.status = 'error';
-            state.data = null;
+            state.data =null;
         });
         builder.addCase(fetchReg.pending, (state) => {
             state.status = 'loading';
-            state.data = null;
+            state.data =null;
         });
 
         builder.addCase(fetchReg.fulfilled, (state, action) => {
@@ -67,11 +85,11 @@ const authSlice = createSlice({
 
         builder.addCase(fetchReg.rejected, (state) => {
             state.status = 'error';
-            state.data = null;
+            state.data =null;
         });
         builder.addCase(fetchAuthMe.pending, (state) => {
             state.status = 'loading';
-            state.data = null;
+            state.data =null;
         });
 
         builder.addCase(fetchAuthMe.fulfilled, (state, action) => {
@@ -81,7 +99,7 @@ const authSlice = createSlice({
 
         builder.addCase(fetchAuthMe.rejected, (state) => {
             state.status = 'error';
-            state.data = null;
+            state.data =null;
         });
     }
 })

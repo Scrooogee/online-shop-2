@@ -1,0 +1,43 @@
+.account {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+
+
+    .user-info {
+        border: 1px solid darken($color: #b6b6b6, $amount: 0.5);
+        min-height: 250px;
+        border-radius: 30px;
+        padding: 20px 15px;
+        display: flex;
+        flex-direction: column;
+
+        h2 {
+            font-size: 30px;
+            margin-bottom: 10px;
+            align-self: center;
+        }
+        p {
+            margin-bottom: 10px;
+        }
+
+        .admin {
+            align-self: center;
+            color: $blue;
+        }
+        
+        button {
+            margin-top: auto;
+        }
+    }
+
+    .user-orders{
+        grid-column-start: 2;
+        grid-column-end: 5;
+
+        padding: 0 15px;
+
+        h2 {
+            font-size: 30px;
+        }
+    }
+}

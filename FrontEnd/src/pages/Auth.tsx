@@ -3,6 +3,8 @@ import { RootState, useAppDispatch } from '../redux/store';
 import { useForm } from 'react-hook-form';
 import { fetchLogin, fetchReg } from '../redux/slices/authSlice';
 import { useSelector } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+import { Navigate } from 'react-router-dom';
 
 type FormValues = {
   email: string;
@@ -15,8 +17,9 @@ type FormValues = {
 
 const Auth: React.FC = () =>  {
 
-    const isAuth = useSelector((state: RootState) => state.authSlice.data)
-
+    const {data, status} = useSelector((state: RootState) => state.authSlice)
+    // console.log(data)
+    const navigate = useNavigate()
 
     const [authPage, SetAuthPage] = React.useState('Login')
 
@@ -29,33 +32,44 @@ const Auth: React.FC = () =>  {
         handleSubmit, 
         formState: { errors, isValid } 
     } = useForm<FormValues>({
-        defaultValues: {
-            email: 'shopadmin@gmail.com',
-            password: '123456'
-        },
+        // defaultValues: {
+        //     email: 'shopadmin@gmail.com',
+        //     password: '123456'
+        // },
         mode: 'onChange'
     });
+
+    
     
     const onSubmitLogin = async (values: FormValues) => {
         const data = await dispatch(fetchLogin(values))
+        const {_id} = data.payload.userData
     
         if (!data.payload) {
           return alert(`Failed to login`)
         }
         if ('token' in data.payload) {
-          window.localStorage.setItem('token', data.payload.token)
+          window.localStorage.setItem('token', data.payload.token);
         }
+        return <Navigate to={`/account/${_id}`}/>
       }
 
     const onSubmitReg = async (values: FormValues) => {
-    const data = await dispatch(fetchReg(values))
+        const data = await dispatch(fetchReg(values))
+        const {_id} = data.payload.userData
 
-    if (!data.payload) {
-        return alert(`Failed to reg`)
+        if (!data.payload) {
+            return alert(`Failed to reg`)
+        }
+        if ('token' in data.payload) {
+            window.localStorage.setItem('token', data.payload.token);
+        }
+        return <Navigate to={`/account/${_id}`}/>
     }
-    if ('token' in data.payload) {
-        window.localStorage.setItem('token', data.payload.token)
-    }
+
+
+    if(data && window.localStorage.getItem('token')) {
+        return <Navigate to={`/account/${data.userData?._id}`}/>
     }
 
     return (
@@ -150,8 +164,8 @@ const Auth: React.FC = () =>  {
                         </label>
                         <input 
                         type="text" 
-                        placeholder='Address...'
-                        {...register('address', {required: 'Input password'})}
+                        placeholder='Index, Street address, City, State...'
+                        {...register('address', {required: 'Input address'})}
                         />
                         {errors?.address && <p>{errors.address?.message}</p>}
                     </div>

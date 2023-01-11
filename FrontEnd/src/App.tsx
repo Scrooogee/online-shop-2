@@ -10,7 +10,8 @@ import { fetchAuthMe } from './redux/slices/authSlice';
 const Cart = React.lazy(() => import( /* webpackChunkName: 'Cart'*/ './pages/Cart'));
 const ProductPage = React.lazy(() => import( /* webpackChunkName: 'ProductPage'*/ './pages/ProductPage'));
 const NotFound = React.lazy(() => import( /* webpackChunkName: 'NotFound'*/ './pages/NotFound'));
-const Auth = React.lazy(() => import(/*webpackChunkName: 'Auth' */ './pages/Auth'))
+const Auth = React.lazy(() => import(/* webpackChunkName: 'Auth' */ './pages/Auth'))
+const Account = React.lazy(() => import (/* webpackChunkName: 'Account' */ './pages/Account'))
 
 const App: React.FC = () =>  {
 
@@ -18,7 +19,6 @@ const App: React.FC = () =>  {
 
     React.useEffect(() => {
         dispatch(fetchAuthMe())
-        console.log(2)
     }, [])
 
 
@@ -41,6 +41,11 @@ const App: React.FC = () =>  {
                     <Route path='auth' element={
                         <Suspense>
                             <Auth/>
+                        </Suspense>
+                    } />
+                    <Route path='account/:id' element={
+                        <Suspense>
+                            <Account/>
                         </Suspense>
                     } />
                     <Route path='*' element={

@@ -1,10 +1,10 @@
 import CartEmpty from "./CartEmpty";
 // import NotFound from "./NotFound";
-import { useNavigate } from "react-router-dom";
+import { Navigate, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { clearItems, selectCart } from "../redux/slices/cartSlice";
-import CartItem from "./CartItem";
-import { CartItemsProps } from "./CartItem";
+import CartItem from "../components/CartItem";
+import { CartItemsProps } from "../components/CartItem";
 
 
 export type CartItemType = {
@@ -28,6 +28,10 @@ const Cart: React.FC = () => {
         if (window.confirm('Clean the cart?')) {
             dispatch(clearItems())
         }
+    }
+
+    if(!window.localStorage.getItem('token')) {
+        return <Navigate to={`/auth`}/>
     }
 
     return(
