@@ -21,6 +21,7 @@ export const Register = async (req, res) => {
             email: req.body.email,
             name: req.body.name,
             lastName: req.body.lastName,
+            phone: req.body.phone,
             address: req.body.address,
             passwordHash: hash
         })
@@ -103,7 +104,7 @@ export const AuthMe = async (req, res) => {
         
         const {passwordHash, ...userData} = user._doc;
 
-        res.json(userData)
+        res.json({userData})
     } catch (error) {
         res.status(404).json({
             message: 'Error 404'
