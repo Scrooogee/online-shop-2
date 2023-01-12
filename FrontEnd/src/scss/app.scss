@@ -3,6 +3,11 @@
 
 @import './components/all';
 
+* {
+  margin: 0;
+  box-sizing: border-box;
+}
+
 body {
   background-image: url(../assets/img/bg_initial.jpg);
   padding: 50px 30px;

@@ -7,11 +7,12 @@ import { useNavigate } from 'react-router-dom';
 import { Navigate } from 'react-router-dom';
 
 type FormValues = {
-  email: string;
-  password: string;
-  name: string;
-  lastName: string;
-  address: string
+  email: string,
+  password: string,
+  name: string,
+  lastName: string,
+  address: string,
+  phone: string,
 };
 
 
@@ -120,7 +121,7 @@ const Auth: React.FC = () =>  {
                         </label>
                         <input 
                         type="email" 
-                        placeholder='Email...'
+                        placeholder='shop@shop.com'
                         {...register('email', {required: 'Input email'})}
                         />
                         {errors?.email && <p>{errors.email?.message}</p>}
@@ -157,6 +158,17 @@ const Auth: React.FC = () =>  {
                         {...register('lastName', {required: 'Input password'})}
                         />
                         {errors?.lastName && <p>{errors.lastName?.message}</p>}
+                    </div>
+                    <div className='input'>
+                        <label className='item-block--title' htmlFor="lastName">
+                            Phone:
+                        </label>
+                        <input 
+                        type="text" 
+                        placeholder='+123456789'
+                        {...register('phone', {required: 'Input password'})}
+                        />
+                        {errors?.phone && <p>{errors.phone?.message}</p>}
                     </div>
                     <div className='input'>
                         <label className='item-block--title' htmlFor="address">

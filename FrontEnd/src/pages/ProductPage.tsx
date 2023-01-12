@@ -9,14 +9,16 @@ import { useAppDispatch } from '../redux/store';
 
 const ProductPage: React.FC = () => {
 
-    const {id} = useParams()
+    const {id} = useParams();
+
 
     const {product, status} = useSelector(productPage)
     const dispatch = useAppDispatch()
-
     const {title, imageUrl, price, sizes = []} = product
 
     const [sizeItem, setSizeItem] = React.useState(sizes[0])
+
+    console.log(product)
 
     React.useEffect(() => {
 
@@ -59,7 +61,7 @@ const ProductPage: React.FC = () => {
                 </div>
                 :
                 <><div className="product-page--image">
-                    <img src={imageUrl} alt="item"></img>
+                    <img src={imageUrl && imageUrl.includes('upload') ? `http://localhost:4000/${imageUrl}` : imageUrl} alt="item"></img>
                 </div>
                 <div className='product-page--info-block'>
                     <h4 className="product-page--title">{title}</h4>

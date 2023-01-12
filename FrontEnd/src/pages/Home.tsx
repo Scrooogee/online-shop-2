@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { selectFilter } from '../redux/slices/filterSlice';
-import { selectGood } from '../redux/slices/goodsSlice';
+import { fetchAdminGoods, selectGood } from '../redux/slices/goodsSlice';
 import { useAppDispatch } from '../redux/store';
 
 
@@ -24,7 +24,6 @@ const Home: React.FC = () => {
     const {categoryId, sortType, pageItem} = useSelector(selectFilter);
     const {items, status} = useSelector(selectGood)
 
-
     React.useEffect(() => {
 
         async function fetchData() {
@@ -35,12 +34,14 @@ const Home: React.FC = () => {
             const pages = `&page=${pageItem}&limit=8`
 
             dispatch(
-                fetchGoods({
+                fetchGoods(
+                    {
                 order,
                 sortBy,
                 categorie,
                 pages
-            }))
+            }
+            ))
 
         }
         fetchData()

@@ -5,14 +5,14 @@ import { CartItemsProps } from '../CartItem';
 import { addCartItems } from '../../redux/slices/cartSlice';
 
 export type CardProps = {
-    id: string,
+    _id: string,
     title: string,
     imageUrl: string,
     price: number,
     sizes: number[]
 }
 
-const Card: React.FC<CardProps> = ({id, title, imageUrl, price, sizes}) => {
+const Card: React.FC<CardProps> = ({_id, title, imageUrl, price, sizes}) => {
 
     const navigate = useNavigate()
 
@@ -22,7 +22,7 @@ const Card: React.FC<CardProps> = ({id, title, imageUrl, price, sizes}) => {
 
     const onClickAdd = () => {
         const item : CartItemsProps = {
-            id,
+            id: _id,
             title,
             imageUrl,
             price,
@@ -38,8 +38,8 @@ const Card: React.FC<CardProps> = ({id, title, imageUrl, price, sizes}) => {
     }
     return(
         <div className="item-block">
-            <img onClick={() => navigate(`product/${id}`)}  className="item-block--image" src={imageUrl} alt="item"></img>
-            <h4 onClick={() => navigate(`product/${id}`)}  className="item-block--title">{title}</h4>
+            <img onClick={() => navigate(`product/${_id}`)}  className="item-block--image" src={imageUrl && imageUrl.includes('upload') ? `http://localhost:4000/${imageUrl}` : imageUrl} alt="item"></img>
+            <h4 onClick={() => navigate(`product/${_id}`)}  className="item-block--title">{title}</h4>
             <div className="item-block--selector">
                 <ul>
                    {sizes.map((size, index) => (

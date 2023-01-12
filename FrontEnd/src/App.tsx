@@ -12,6 +12,8 @@ const ProductPage = React.lazy(() => import( /* webpackChunkName: 'ProductPage'*
 const NotFound = React.lazy(() => import( /* webpackChunkName: 'NotFound'*/ './pages/NotFound'));
 const Auth = React.lazy(() => import(/* webpackChunkName: 'Auth' */ './pages/Auth'))
 const Account = React.lazy(() => import (/* webpackChunkName: 'Account' */ './pages/Account'))
+const AdminGoods = React.lazy(() => import(/* webpackChunkName: 'AdminGoods' */ './components/AdminPanel/AdminGoods'))
+const AdminOrders = React.lazy(() => import(/* webpackChunkName: 'AdminGoods' */ './components/AdminPanel/AdminOrders'))
 
 const App: React.FC = () =>  {
 

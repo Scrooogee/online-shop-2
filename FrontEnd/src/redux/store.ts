@@ -4,6 +4,7 @@ import cartSlice from './slices/cartSlice'
 import goodsSlice from './slices/goodsSlice'
 import productPageSlice from './slices/productPageSlice'
 import authSlice from './slices/authSlice'
+import AddPopUpSlice from './slices/AddSlice'
 import { useDispatch } from 'react-redux'
 
 export const store = configureStore({
@@ -12,7 +13,8 @@ export const store = configureStore({
     cartSlice,
     goodsSlice,
     productPageSlice,
-    authSlice
+    authSlice,
+    AddPopUpSlice
   },
 });
 

@@ -1,5 +1,5 @@
 import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
-import axios from "axios";
+import axios from "../../axios";
 import { CardProps } from "../../components/Card";
 import { RootState } from "../store";
 
@@ -7,7 +7,7 @@ type fetchProfuccParams = Record<string, string>
 
 export const fetchProfuctPage = createAsyncThunk('product/fetchProductPageStatus', async (params: fetchProfuccParams) => {
     const {id} = params;
-    const {data} = await axios.get<CardProps>(`https://637c4a6372f3ce38ea9edc01.mockapi.io/Items/${id}`);
+    const {data} = await axios.get<CardProps>(`/product/${id}`);
     return data;
 })
 
@@ -18,7 +18,7 @@ interface ProductPageSlice {
 
 const initialState: ProductPageSlice = {
     product: {
-        id: '',
+        _id: '',
         title: '',
         imageUrl: '',
         price: 0,

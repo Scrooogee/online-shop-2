@@ -7,10 +7,11 @@ type fetchLoginParams = Record<string, string>
 export type UserData =  {
     address: string,
     email: string,
-    isAdmin: boolean
-    lastName: string
-    name: string
-    _id: string
+    isAdmin: boolean,
+    lastName: string,
+    name: string,
+    phone: string,
+    _id: string,
 }
 
 
@@ -23,21 +24,21 @@ export type Data = {
 
 export const fetchLogin = createAsyncThunk('auth/fetchLogin', async (params: fetchLoginParams) => {
     const {data} = await axios.post('/auth/login', params);
-    console.log(data)
+    // console.log(data)
     return data
     
 });
 
 export const fetchReg = createAsyncThunk('auth/fetchReg', async (params: fetchLoginParams) => {
     const {data} = await axios.post('/auth/register', params)
-    console.log(data)
+    // console.log(data)
     return data
    
 });
 
 export const fetchAuthMe = createAsyncThunk('auth/fetchAuthMe', async () => {
     const {data} = await axios.get('/auth/me')
-    console.log(data)
+    // console.log(data)
     return data
 });
 
