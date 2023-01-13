@@ -3,7 +3,8 @@ import { body } from "express-validator";
 export const ProductValidator = [
     body('title', 'This field should not be empty.').isLength({min: 3}).isString(),
     body('sizes', 'This field should not be empty.').isArray(),
-    body('imageUrl', 'This field should not be empty.').isURL()
+    body('imageUrl', 'This field should not be empty.').isURL(),
+    body('category', 'This field should not be empty.').isString(),
 ];
 
 export const registerValidator = [

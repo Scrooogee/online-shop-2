@@ -5,6 +5,19 @@ import { validationResult } from 'express-validator';
 
 import UserModel from "../modes/User.js";
 
+
+export const GetAllUsers = async (req, res) => {
+    try {
+        const users = await UserModel.find().exec()
+        res.json(users)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: 'Faild to find orders'
+        })
+    }
+};
+
 export const Register = async (req, res) => {
     try {
         const errors = validationResult(req)

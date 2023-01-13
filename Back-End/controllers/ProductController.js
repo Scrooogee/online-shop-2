@@ -3,7 +3,7 @@ import ProductModel from "../modes/Product.js";
 export const GetAll = async (req, res) => {
     try {
         const products = await ProductModel.find().exec()
-        res.json(products)
+        res.json(products.sort((oldProd, newProd) => newProd.createdAt - oldProd.createdAt))
     } catch (error) {
         console.log(error)
         res.status(500).json({
@@ -18,6 +18,7 @@ export const Create = async (req, res) => {
             title: req.body.title,
             sizes: req.body.sizes.split(','),
             price: req.body.price,
+            category: req.body.category,
             imageUrl: req.body.imageUrl
         })
 
@@ -27,7 +28,7 @@ export const Create = async (req, res) => {
     } catch (error) {
         console.log(error)
         res.status(500).json({
-            message: 'Faild to found the products'
+            message: 'Faild to add the products'
         })
     }
 };
@@ -110,6 +111,35 @@ export const Remove = async (req, res) => {
         console.log(error)
         res.status(500).json({
             massage: 'Couldn\'t to found the post'
+        })
+    }
+};
+
+export const Update = async (req, res) => {
+    try {
+
+        const {id} = req.params
+
+        await ProductModel.findByIdAndUpdate(
+            {
+                _id: id,
+            },
+            {
+                title: req.body.title,
+                sizes: req.body.sizes.split(','),
+                price: req.body.price,
+                category: req.body.category,
+                imageUrl: req.body.imageUrl
+            }
+        );
+
+        res.json({
+            succes: true
+        })
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            massage: 'Coudn\'t update the post'
         })
     }
 };
