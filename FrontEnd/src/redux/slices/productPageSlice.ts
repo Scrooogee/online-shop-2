@@ -22,7 +22,8 @@ const initialState: ProductPageSlice = {
         title: '',
         imageUrl: '',
         price: 0,
-        sizes: []
+        sizes: [],
+        category: '',
     },
     status: 'loading'
 }

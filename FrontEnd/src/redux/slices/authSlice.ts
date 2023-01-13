@@ -1,4 +1,4 @@
-import { createSlice, createAsyncThunk, PayloadAction } from "@reduxjs/toolkit";
+import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "../../axios";
 import { RootState } from "../store";
 
@@ -12,6 +12,7 @@ export type UserData =  {
     name: string,
     phone: string,
     _id: string,
+    orders: []
 }
 
 
@@ -44,7 +45,7 @@ export const fetchAuthMe = createAsyncThunk('auth/fetchAuthMe', async () => {
 
 
 interface AuthSliceState {
-    data: Data | null,
+    data: Data | null
     status: 'loading' | 'succes' | 'error'
 }
 
@@ -104,6 +105,8 @@ const authSlice = createSlice({
         });
     }
 })
+
+export const SelectAuth = (state: RootState) => state.authSlice
 
 
 export default authSlice.reducer

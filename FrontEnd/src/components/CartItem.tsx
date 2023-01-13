@@ -1,14 +1,17 @@
 import React from 'react';
 import { useDispatch } from "react-redux";
+import { UserData } from '../redux/slices/authSlice';
 import { minusCartItem, addCartItems, removeCartItems} from "../redux/slices/cartSlice";
 
 export type CartItemsProps = {
-    id: string,
+    _id: string,
     title: string,
     size: number,
+    category: string,
     imageUrl: string,
     count: number,
     price: number
+    user: UserData
 }
 
 const CartItem: React.FC<CartItemsProps> = (params) => {

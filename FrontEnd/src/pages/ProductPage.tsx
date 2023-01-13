@@ -5,16 +5,18 @@ import { fetchProfuctPage } from '../redux/slices/productPageSlice';
 import { addCartItems } from '../redux/slices/cartSlice';
 import ContentLoader from "react-content-loader";
 import { productPage } from '../redux/slices/productPageSlice';
-import { useAppDispatch } from '../redux/store';
+import { RootState, useAppDispatch } from '../redux/store';
+import { CartItemsProps } from '../components/CartItem';
 
 const ProductPage: React.FC = () => {
+    const data: any  = useSelector((state: RootState) => state.authSlice.data)
 
     const {id} = useParams();
 
 
     const {product, status} = useSelector(productPage)
     const dispatch = useAppDispatch()
-    const {title, imageUrl, price, sizes = []} = product
+    const {_id, title, imageUrl, price, sizes = [], category} = product
 
     const [sizeItem, setSizeItem] = React.useState(sizes[0])
 
@@ -30,13 +32,15 @@ const ProductPage: React.FC = () => {
     }, [id])
 
     const onClickAdd = () => {
-        const item = {
-            id: `${id}`,
+        const item : CartItemsProps = {
+            _id: _id,
             title,
             imageUrl,
             price,
+            category,
             size: sizeItem,
-            count: 0
+            count: 0,
+            user: data?.userData,
         };
         dispatch(addCartItems(item))
     }

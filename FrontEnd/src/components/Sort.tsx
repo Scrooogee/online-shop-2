@@ -7,8 +7,8 @@ type SortClick = MouseEvent & {
 }
 
 const sortItems: SortType[] = [
-    {name: 'popular ↓', property: 'rating'}, 
-    {name: 'popular ↑', property: '-rating'}, 
+    {name: 'new ↓', property: 'new'}, 
+    {name: 'old ↑', property: 'old'}, 
     {name: 'price ↓', property: 'price'}, 
     {name: 'price ↑', property: '-price'},
     {name:'alphabet ↓', property: 'title'},

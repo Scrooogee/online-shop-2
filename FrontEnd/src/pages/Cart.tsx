@@ -1,10 +1,10 @@
 import CartEmpty from "./CartEmpty";
-// import NotFound from "./NotFound";
 import { Navigate, useNavigate } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { clearItems, selectCart } from "../redux/slices/cartSlice";
+import { clearItems, fetchSendOrder, selectCart } from "../redux/slices/cartSlice";
 import CartItem from "../components/CartItem";
 import { CartItemsProps } from "../components/CartItem";
+import { useAppDispatch } from "../redux/store";
 
 
 export type CartItemType = {
@@ -19,15 +19,32 @@ const Cart: React.FC = () => {
         window.scrollTo({top: 0})
     }
 
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const {cartItems, totalPrice} = useSelector(selectCart);
 
+    
+console.log(cartItems)
     const totalCount = cartItems.reduce((sum: number, item: CartItemType) => sum += item.count, 0);
 
     const cleanCart = () => {
         if (window.confirm('Clean the cart?')) {
             dispatch(clearItems())
         }
+    }
+
+    const SendOrder = () => {
+        cartItems.map(item => dispatch(fetchSendOrder({
+            title: item.title,
+            size: `${item.size}`,
+            price: `${item.price}`,
+            category: item.category,
+            imageUrl: item.imageUrl,
+            count: `${item.count}`,
+            _id: item.user._id
+        })))
+
+        dispatch(clearItems())
+
     }
 
     if(!window.localStorage.getItem('token')) {
@@ -74,10 +91,10 @@ const Cart: React.FC = () => {
                             <svg width="8" height="14" viewBox="0 0 8 14" fill="none" xmlns="http://www.w3.org/2000/svg">
                                 <path d="M7 13L1 6.93015L6.86175 1" stroke="#D3D3D3" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
                             </svg>
-                            <span>Вернуться назад</span>
+                            <span>Go back</span>
                         </button>
-                        <div className="button pay-btn">
-                            <span>Оплатить сейчас</span>
+                        <div onClick={SendOrder} className="button pay-btn">
+                            <span>Buy now</span>
                         </div>
                     </div>
                 </div>

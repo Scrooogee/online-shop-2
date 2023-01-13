@@ -1,18 +1,24 @@
 import React from 'react'
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Navigate, useNavigate } from 'react-router-dom';
 import { CartItemsProps } from '../CartItem';
 import { addCartItems } from '../../redux/slices/cartSlice';
+import { RootState } from '../../redux/store';
+import { Data, UserData } from '../../redux/slices/authSlice';
 
 export type CardProps = {
     _id: string,
     title: string,
     imageUrl: string,
     price: number,
-    sizes: number[]
+    sizes: number[],
+    category: string,
 }
 
-const Card: React.FC<CardProps> = ({_id, title, imageUrl, price, sizes}) => {
+const Card: React.FC<CardProps> = ({_id, title, imageUrl, price, sizes, category}) => {
+
+    const data: any  = useSelector((state: RootState) => state.authSlice.data)
+    
 
     const navigate = useNavigate()
 
@@ -22,12 +28,14 @@ const Card: React.FC<CardProps> = ({_id, title, imageUrl, price, sizes}) => {
 
     const onClickAdd = () => {
         const item : CartItemsProps = {
-            id: _id,
+            _id,
             title,
             imageUrl,
             price,
+            category,
             size: sizeItem,
             count: 0,
+            user: data?.userData,
         };
         dispatch(addCartItems(item))
     }

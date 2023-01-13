@@ -29,7 +29,7 @@ const AdminPanel: React.FC = () => {
                 >{item}</span>
             ))}
             <div className='panel-content'>
-                {nav === 'Orders' ?  <AdminOrders/> : <AdminGoods/>}
+                {nav === 'Orders' ?  <AdminOrders/> : <AdminGoods />}
             </div>
         </>
     )

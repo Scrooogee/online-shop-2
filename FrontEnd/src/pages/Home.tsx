@@ -30,7 +30,7 @@ const Home: React.FC = () => {
 
             const order = sortType.property.includes('-') ? 'asc' : 'desc';
             const sortBy = sortType.property.replace('-', '');
-            const categorie = categoryId > 0 ? `category=${categoryId}` : '';
+            const categorie = categoryId !== 'All' ? `category=${categoryId}` : '';
             const pages = `&page=${pageItem}&limit=8`
 
             dispatch(

@@ -1,13 +1,18 @@
 import React from 'react'
 import { useSelector, useDispatch} from 'react-redux';
 import { setCategorieId , selectCategory} from '../redux/slices/filterSlice';
+import {selectGood} from '../redux/slices/goodsSlice'
 
 const Categories: React.FC = () => {
     const dispatch = useDispatch()
+    
+    const {items} = useSelector(selectGood)
+    const category = useSelector(selectCategory)
 
-    const categoryId = useSelector(selectCategory)
+    const categoriesItem = items.reduce((acc, item) => acc.includes(item.category) ? acc: acc =`${acc}, ${item.category}`, 'All').split(',');
+    // const all = categoriesItem.unshift('All')
 
-    const categoriesItem = ['All', 'Casual', 'Sport', 'Canvas', 'Skate'];
+    console.log(categoriesItem)
 
     return (
         <div className="categories">
@@ -15,8 +20,8 @@ const Categories: React.FC = () => {
                 {categoriesItem.map((name, index) => ( 
                     <li 
                     key={`${name}--${index}`}  
-                    className={categoryId === index ? 'active' : ''} 
-                    onClick={() => dispatch(setCategorieId(index))}>{name}</li>
+                    className={category === name ? 'active' : ''} 
+                    onClick={() => dispatch(setCategorieId(name))}>{name}</li>
                 ))}
             </ul>
         </div>
