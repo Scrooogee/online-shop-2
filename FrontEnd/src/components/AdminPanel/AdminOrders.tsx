@@ -27,9 +27,10 @@ const AdminOrders: React.FC = () => {
 
     return (
         <div className='goods orders'>
-            {isLoading ? [...Array(5)].map(item => (
+            {isLoading ? [...Array(5)].map((item, index) => (
 
                 <ContentLoader
+                key={index}
                 className='goods--skeleton'
                 speed={2}
                 height={111}
@@ -42,8 +43,10 @@ const AdminOrders: React.FC = () => {
 
             )) 
             : 
-            items.map((item) => (
-                <div className='orders--item'>
+            items.map((item, index) => (
+                <div
+                key={`${item.title}__${index}`}
+                 className='orders--item'>
                     <div className="goods--item">
                         <img src={item.imageUrl && item.imageUrl.includes('upload') ? `http://localhost:4000/${item.imageUrl}` : item.imageUrl}  alt="" />
                         <div className="info"> 

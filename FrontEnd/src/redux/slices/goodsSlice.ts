@@ -7,13 +7,15 @@ type FetchGoodsParams = Record<string, string>
 
 
 export const fetchGoods = createAsyncThunk('item/fetchItemStatus', async (params: FetchGoodsParams) => {
-    const {order, sortBy, categorie, pages} = params;
-    const {data} = await axios.get<CardProps[]>(`/product`);
+    const {order, sortBy, category, pages} = params;
+    const {data} = await axios.get<CardProps[]>(`/product?${category}${order}=${sortBy}`);
+
+    console.log(`/product?${category}${order}=${sortBy}`)
     return data;
 });
 
 export const fetchAdminGoods = createAsyncThunk('item/fetchAdminItemStatus', async () => {
-    const {data} = await axios.get<CardProps[]>(`/product`);
+    const {data} = await axios.get<CardProps[]>(`/admin`);
     return data;
 });
 

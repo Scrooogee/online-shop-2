@@ -28,19 +28,19 @@ const Home: React.FC = () => {
 
         async function fetchData() {
 
-            const order = sortType.property.includes('-') ? 'asc' : 'desc';
+            const order = sortType.property.includes('-') ? 'sortAskBy' : 'sortDeskBy';
             const sortBy = sortType.property.replace('-', '');
-            const categorie = categoryId !== 'All' ? `category=${categoryId}` : '';
+            const category = categoryId !== 'All' ? `category=${categoryId}&` : '';
             const pages = `&page=${pageItem}&limit=8`
 
             dispatch(
                 fetchGoods(
                     {
-                order,
-                sortBy,
-                categorie,
-                pages
-            }
+                        order,
+                        sortBy,
+                        category: category.replaceAll(' ', ''),
+                        pages
+                    }
             ))
 
         }

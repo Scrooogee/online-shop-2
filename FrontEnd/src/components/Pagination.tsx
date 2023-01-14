@@ -1,6 +1,7 @@
 import React from 'react';
 import { useSelector, useDispatch} from 'react-redux';
 import { setPage, selectPage} from '../redux/slices/filterSlice'
+import { selectGood } from '../redux/slices/goodsSlice';
 
 
 const Pagination: React.FC = () => {
@@ -9,8 +10,14 @@ const Pagination: React.FC = () => {
 
     const pageItem = useSelector(selectPage)
 
+    const {items} = useSelector(selectGood)
+    const arg = 8;
 
-    const pages = [1, 2, 3]
+    const pages: number[] = [];
+
+    for(let i = 1; i <= Math.ceil(items.length / arg); i++) {
+        pages.push(i)
+    }
 
     const setPrevPage = () => {
         if (pageItem > 1) {

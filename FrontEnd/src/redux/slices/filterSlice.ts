@@ -3,7 +3,7 @@ import { RootState } from '../store';
 
 export type SortType = {
     name: string,
-    property: 'new' | 'old' | 'price' | '-price' | 'title' | '-title'
+    property: 'new' | '-old' | 'price' | '-price' 
 }
 interface filterSliceState {
     categoryId: string,
@@ -15,10 +15,11 @@ const initialState: filterSliceState = {
     categoryId: 'All',
     pageItem: 1,
     sortType: {
-        name: 'new ↓', 
+        name: 'new', 
         property: 'new'
     }
 }
+
 
 export const filterSlice = createSlice({
     name: 'filters',
@@ -26,6 +27,7 @@ export const filterSlice = createSlice({
     reducers: {
         setCategorieId(state, action: PayloadAction<string>) {
             state.categoryId = action.payload;
+            console.log(action.payload)
         },
 
         setSort(state, action: PayloadAction<SortType>) {
