@@ -1,6 +1,47 @@
 import ProductModel from "../modes/Product.js";
 
 export const GetAll = async (req, res) => {
+
+    const {category, sortDeskBy, sortAskBy} = req.query
+    try {
+        const products = await ProductModel.find().exec()
+        let product = [];
+
+        if(product && sortDeskBy === 'new') {
+            product = products.sort((oldProd, newProd) => newProd.createdAt - oldProd.createdAt)
+        }
+
+        if(product && sortAskBy === 'old') {
+            product = products.sort((oldProd, newProd) => oldProd.createdAt - newProd.createdAt)
+        }
+
+        if(product && sortDeskBy === 'price') {
+            product = products.sort((min, max) => +max.price - +min.price)
+        }
+
+        if( product && sortAskBy === 'price') {
+            product = products.sort((min, max) => +min.price - +max.price)
+        }
+
+        
+
+        if (product && category) {
+            product = product.filter(item => item.category.toLowerCase() === category.toLowerCase())
+        }
+        
+
+
+        res.json(product)
+    } catch (error) {
+        console.log(error)
+        res.status(500).json({
+            message: 'Faild to found the products'
+        })
+    }
+};
+
+export const GetAllAdminPannel = async (req, res) => {
+
     try {
         const products = await ProductModel.find().exec()
         res.json(products.sort((oldProd, newProd) => newProd.createdAt - oldProd.createdAt))
@@ -10,6 +51,7 @@ export const GetAll = async (req, res) => {
             message: 'Faild to found the products'
         })
     }
+
 };
 
 export const Create = async (req, res) => {

@@ -5,7 +5,7 @@ import cors from "cors"
 
 import { checkAuth } from "./utils/index.js";
 import { ProductValidator, registerValidator } from "./validations/index.js";
-import { GetAll, Create, ImageUpload, GetOne, Remove, Update } from "./controllers/ProductController.js";
+import { GetAll, Create, ImageUpload, GetOne, Remove, Update, GetAllAdminPannel } from "./controllers/ProductController.js";
 import { Register, Login, AuthMe, GetAllUsers } from "./controllers/UserController.js";
 import { CreateOrder, GetAllOrders, GetUsersOrders, RemoveOrder } from "./controllers/OrderController.js";
 
@@ -40,9 +40,9 @@ app.post('/auth/register', registerValidator, Register )
 app.get('/auth/me', checkAuth, AuthMe);
 app.get('/users', GetAllUsers)
 
-
 app.post('/upload', checkAuth, upload.single('image'), ImageUpload);
 app.get('/product', GetAll)
+app.get('/admin', checkAuth, GetAllAdminPannel)
 app.get('/product/:id', GetOne)
 app.post('/product', checkAuth, ProductValidator,  Create)
 app.delete('/product/:id', checkAuth, Remove)
