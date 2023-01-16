@@ -3,17 +3,16 @@ import { useSelector, useDispatch} from 'react-redux';
 import { setCategorieId , selectCategory} from '../redux/slices/filterSlice';
 import {selectGood} from '../redux/slices/goodsSlice'
 
-const Categories: React.FC = () => {
+interface CategoryProps {
+    catigoriesItem: string[]
+}
+
+const Categories: React.FC<CategoryProps> = ({catigoriesItem}) => {
     const dispatch = useDispatch()
-    const [catigoriesItem, setCategory] = React.useState<string[]>([])
+
     const {items} = useSelector(selectGood)
     const category = useSelector(selectCategory)
     
-    React.useEffect(() => {
-        const categories = items.reduce((acc, item) => acc.includes(item.category) ? acc: acc =`${acc}, ${item.category}`, 'All').split(',');
-        setCategory(categories)
-    //     console.log(categories)
-    }, [])
 
 
     return (

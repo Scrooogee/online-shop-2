@@ -3,21 +3,17 @@ import { useSelector, useDispatch} from 'react-redux';
 import { setPage, selectPage} from '../redux/slices/filterSlice'
 import { selectGood } from '../redux/slices/goodsSlice';
 
+interface PginationProps {
+    pages: number[]
+}
 
-const Pagination: React.FC = () => {
+const Pagination: React.FC<PginationProps> = ({pages}) => {
+
 
     const dispatch = useDispatch()
 
     const pageItem = useSelector(selectPage)
 
-    const {items} = useSelector(selectGood)
-    const arg = 8;
-
-    const pages: number[] = [];
-
-    for(let i = 1; i <= Math.ceil(items.length / arg); i++) {
-        pages.push(i)
-    }
 
     const setPrevPage = () => {
         if (pageItem > 1) {

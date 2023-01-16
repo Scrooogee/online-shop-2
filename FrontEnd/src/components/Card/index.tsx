@@ -19,7 +19,6 @@ const Card: React.FC<CardProps> = ({_id, title, imageUrl, price, sizes, category
 
     const data: any  = useSelector((state: RootState) => state.authSlice.data)
     
-
     const navigate = useNavigate()
 
     const dispatch = useDispatch()

@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
+import { Action } from '@remix-run/router';
 import { RootState } from '../store';
 
 export type SortType = {
@@ -27,7 +28,6 @@ export const filterSlice = createSlice({
     reducers: {
         setCategorieId(state, action: PayloadAction<string>) {
             state.categoryId = action.payload;
-            console.log(action.payload)
         },
 
         setSort(state, action: PayloadAction<SortType>) {
@@ -36,6 +36,7 @@ export const filterSlice = createSlice({
         setPage(state, action: PayloadAction<number>) {
             state.pageItem = action.payload;
         },
+        
 
     },
 

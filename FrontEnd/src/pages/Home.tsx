@@ -1,7 +1,7 @@
 import React from 'react'
 import { useSelector } from 'react-redux';
 import { selectFilter } from '../redux/slices/filterSlice';
-import { fetchAdminGoods, selectGood } from '../redux/slices/goodsSlice';
+import { selectCaregoryItems, selectGood } from '../redux/slices/goodsSlice';
 import { useAppDispatch } from '../redux/store';
 
 
@@ -23,6 +23,17 @@ const Home: React.FC = () => {
 
     const {categoryId, sortType, pageItem} = useSelector(selectFilter);
     const {items, status} = useSelector(selectGood)
+    const categoryItems = useSelector(selectCaregoryItems)
+
+
+    
+    const PageArg = 4;
+
+    const pages: number[] = [];
+
+    for(let i = 1; i <= Math.ceil(items.length / PageArg); i++) {
+        pages.push(i)
+    }
 
     React.useEffect(() => {
 
@@ -31,23 +42,26 @@ const Home: React.FC = () => {
             const order = sortType.property.includes('-') ? 'sortAskBy' : 'sortDeskBy';
             const sortBy = sortType.property.replace('-', '');
             const category = categoryId !== 'All' ? `category=${categoryId}&` : '';
-            const pages = `&page=${pageItem}&limit=8`
 
-            dispatch(
+            await dispatch(
                 fetchGoods(
                     {
                         order,
                         sortBy,
                         category: category.replaceAll(' ', ''),
-                        pages
                     }
             ))
 
         }
         fetchData()
-
+        
         
     }, [categoryId, sortType, pageItem])
+
+
+    const lastItemIndex = pageItem * PageArg;
+    const firstItemIndex = lastItemIndex - PageArg;
+    const currentItemPage = items.slice(firstItemIndex, lastItemIndex)
 
 
     return (
@@ -56,20 +70,21 @@ const Home: React.FC = () => {
                 <h1>Best Sneakers</h1>
             </div>
             <div id='top' className="content--top">
-                <Categories/>
+                <Categories 
+                catigoriesItem={categoryItems}/>
                 <Sort/>
             </div>
             <h2 className="content--title">All sneakers</h2>
             <div className="content--items">
             {status === 'loading' ? [...new Array(12)].map((_, index)=> (<Skeleton key={index}/>)) 
             : 
-            items.map((item: CardProps, index: number) => ( 
+            currentItemPage.map((item: CardProps, index: number) => ( 
                     <Card 
                     key={`${item.title}--${index}`}
                     {...item}/>
                 ))}
             </div>
-            <Pagination />
+            <Pagination pages={pages}/>
         </>
     )
 };

@@ -20,8 +20,6 @@ const ProductPage: React.FC = () => {
 
     const [sizeItem, setSizeItem] = React.useState(sizes[0])
 
-    console.log(product)
-
     React.useEffect(() => {
 
         dispatch(
