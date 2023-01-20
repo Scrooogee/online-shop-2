@@ -24,16 +24,21 @@ export type Data = {
 
 
 export const fetchLogin = createAsyncThunk('auth/fetchLogin', async (params: fetchLoginParams) => {
-    const {data} = await axios.post('/auth/login', params);
-    // console.log(data)
-    return data
-    
+    try {
+        const {data} = await axios.post('/auth/login', params);
+        return data
+    } catch (error: any) {
+        alert(error.response.data.message) 
+    }
 });
 
 export const fetchReg = createAsyncThunk('auth/fetchReg', async (params: fetchLoginParams) => {
-    const {data} = await axios.post('/auth/register', params)
-    // console.log(data)
-    return data
+    try {
+        const {data} = await axios.post('/auth/register', params)
+        return data
+    } catch (error: any) {
+        alert(error.response.data.message) 
+    }
    
 });
 

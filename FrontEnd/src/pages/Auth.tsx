@@ -19,7 +19,7 @@ type FormValues = {
 const Auth: React.FC = () =>  {
 
     const {data, status} = useSelector((state: RootState) => state.authSlice)
-    // console.log(data)
+
     const navigate = useNavigate()
 
     const [authPage, SetAuthPage] = React.useState('Login')
@@ -33,11 +33,11 @@ const Auth: React.FC = () =>  {
         handleSubmit, 
         formState: { errors, isValid } 
     } = useForm<FormValues>({
-        // defaultValues: {
-        //     email: 'shopadmin@gmail.com',
-        //     password: '123456'
-        // },
-        mode: 'onChange'
+        defaultValues: {
+            email: 'shopadmin@gmail.com',
+            password: '123456'
+        },
+        mode: 'onSubmit'
     });
 
     
